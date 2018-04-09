@@ -10,6 +10,10 @@ public class PlayerSetup : NetworkBehaviour
 
     [SerializeField]
     Behaviour[] componentsToDisableForRemotes;
+    [SerializeField]
+    private string dontDrawLayerName = "DontDraw";
+    [SerializeField]
+    GameObject playerGraphics;
 
     #region Unity Callbacks
     void Start()
@@ -27,6 +31,11 @@ public class PlayerSetup : NetworkBehaviour
                 Debug.Log("disable scene camera");
                 sceneCamera.gameObject.SetActive(false);
             }
+
+            //Disable obstructive player graphics for local player
+            int layer = LayerMask.NameToLayer(dontDrawLayerName);
+            SetLayerRecursively(playerGraphics.transform, layer);
+            //TODO: consider: how bullet impacts still hit this layer.
         }
         GetComponent<Player>().Setup();
     }
@@ -50,6 +59,17 @@ public class PlayerSetup : NetworkBehaviour
                                    GetComponent<Player>());
     }
     #endregion
+
+    void SetLayerRecursively(Transform t, int layer)
+    {
+        Debug.Log("setting layer for " + t.gameObject.name + " to " + layer);
+        t.gameObject.layer = layer;
+        foreach (Transform otherT in t.transform)
+        {
+            SetLayerRecursively(otherT, layer);
+        }
+
+    }
 
     private void AssignToRemoteLayer()
     {
