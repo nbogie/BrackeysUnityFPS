@@ -718,10 +718,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ab8907dd6bf24e9394dfd4394e5c46d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponManager: {fileID: 0}
   layerMask:
     serializedVersion: 2
     m_Bits: 513
+  weaponManager: {fileID: 0}
 --- !u!114 &114516505802853618
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -836,18 +836,24 @@ MonoBehaviour:
   primaryWeapon:
     fireDelay: 0.1
     accuracy: 0.01
+    range: 60
+    damage: 20
+    graphics: {fileID: 1314501180321840, guid: 82f7865bd89d3425f9a78d28147018c0, type: 2}
+  secondaryWeapon:
+    fireDelay: 0
+    accuracy: 0.02
     range: 10
     damage: 5
-    graphics: {fileID: 1314501180321840, guid: 82f7865bd89d3425f9a78d28147018c0, type: 2}
+    graphics: {fileID: 1735090578919102, guid: e0229009fc7f84c279bd7f334f68df1a, type: 2}
+  impactEffect: {fileID: 1478897593541752, guid: 651d9da62846f42f5b12c4ecf5c0c488,
+    type: 2}
+  weaponHolder: {fileID: 4810902528259826}
   currentWeapon:
     fireDelay: 0.5
     accuracy: 0.01
     range: 10
     damage: 5
     graphics: {fileID: 0}
-  impactEffect: {fileID: 1478897593541752, guid: 651d9da62846f42f5b12c4ecf5c0c488,
-    type: 2}
-  weaponHolder: {fileID: 4810902528259826}
 --- !u!114 &114964334907908156
 MonoBehaviour:
   m_ObjectHideFlags: 1

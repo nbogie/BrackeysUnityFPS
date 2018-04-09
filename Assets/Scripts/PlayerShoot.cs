@@ -24,21 +24,28 @@ public class PlayerShoot : NetworkBehaviour
 
     void Update()
     {
-        currentWeapon = weaponManager.GetCurrentWeapon();
-        if (currentWeapon.CanAutoFire())
+        if (Input.GetKeyDown(KeyCode.T))
         {
-            if (Input.GetButtonDown("Fire1"))
+
+            CancelInvoke();
+            weaponManager.TogglePrimarySecondary();
+        }
+
+        currentWeapon = weaponManager.GetCurrentWeapon();
+
+        //Regardless of *current* weapon type, 
+        //cancel any previously invoked fire() when releasing trigger
+        if (Input.GetButtonUp("Fire1"))
+        {
+            CancelInvoke();
+        }
+        else if (Input.GetButtonDown("Fire1"))
+        {
+            if (currentWeapon.CanAutoFire())
             {
                 InvokeRepeating("FireWeapon", 0.000001f, currentWeapon.fireDelay);
             }
-            if (Input.GetButtonUp("Fire1"))
-            {
-                CancelInvoke();
-            }
-        }
-        else
-        {
-            if (Input.GetButton("Fire1"))
+            else
             {
                 FireWeapon();
             }
