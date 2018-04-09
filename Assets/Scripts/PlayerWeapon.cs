@@ -8,6 +8,8 @@ public class PlayerWeapon
     public float range = 10f;
     public int damage = 5;
 
+    public GameObject graphics;
+
     public bool CanAutoFire()
     {
         return fireDelay > 0;

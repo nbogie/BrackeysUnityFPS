@@ -11,6 +11,10 @@ public class PlayerShoot : NetworkBehaviour
     [Header("Weapon settings")]
     [SerializeField]
     private GameObject weaponImpactEffect;
+
+    [SerializeField]
+    private Transform weaponHolder;
+
     [SerializeField]
     private LayerMask layerMask;
 
@@ -22,6 +26,7 @@ public class PlayerShoot : NetworkBehaviour
     {
         myCam = GetComponentInChildren<Camera>();
         layerMask = LayerMask.GetMask("Default", "RemotePlayers");
+        EquipWeapon(currentWeapon);
     }
 
     void Update()
@@ -46,6 +51,12 @@ public class PlayerShoot : NetworkBehaviour
         }
     }
     #endregion
+    void EquipWeapon(PlayerWeapon weapon)
+    {
+        currentWeapon = weapon;
+        GameObject weapObj = Instantiate(weapon.graphics, weaponHolder.position, weaponHolder.rotation);
+        weapObj.transform.SetParent(weaponHolder);
+    }
 
     [Client]
     private void FireWeapon()
