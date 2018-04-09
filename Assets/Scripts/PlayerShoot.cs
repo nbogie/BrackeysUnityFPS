@@ -2,35 +2,29 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
-
+[RequireComponent(typeof(WeaponManager))]
 public class PlayerShoot : NetworkBehaviour
 {
-    [SerializeField]
-    public PlayerWeapon currentWeapon;
-
-    [Header("Weapon settings")]
-    [SerializeField]
-    private GameObject weaponImpactEffect;
-
-    [SerializeField]
-    private Transform weaponHolder;
 
     [SerializeField]
     private LayerMask layerMask;
+    [SerializeField]
+    private WeaponManager weaponManager;
+    private PlayerWeapon currentWeapon;
 
-    private Camera myCam;
-    private float timeForNextFiring;
+    private Camera camForShootRaycast;
 
     #region Unity Callbacks
     void Start()
     {
-        myCam = GetComponentInChildren<Camera>();
         layerMask = LayerMask.GetMask("Default", "RemotePlayers");
-        EquipWeapon(currentWeapon);
+        weaponManager = GetComponent<WeaponManager>();
+        camForShootRaycast = GetComponentInChildren<Camera>();
     }
 
     void Update()
     {
+        currentWeapon = weaponManager.GetCurrentWeapon();
         if (currentWeapon.CanAutoFire())
         {
             if (Input.GetButtonDown("Fire1"))
@@ -51,25 +45,18 @@ public class PlayerShoot : NetworkBehaviour
         }
     }
     #endregion
-    void EquipWeapon(PlayerWeapon weapon)
-    {
-        currentWeapon = weapon;
-        GameObject weapObj = Instantiate(weapon.graphics, weaponHolder.position, weaponHolder.rotation);
-        weapObj.transform.SetParent(weaponHolder);
-    }
 
     [Client]
     private void FireWeapon()
     {
         RaycastHit hitInfo;
-        Vector3 dir = myCam.transform.forward + Random.insideUnitSphere * currentWeapon.accuracy;
-        if (Physics.Raycast(myCam.transform.position, dir, out hitInfo, currentWeapon.range, layerMask))
+        Vector3 dir = camForShootRaycast.transform.forward + Random.insideUnitSphere * currentWeapon.accuracy;
+        if (Physics.Raycast(camForShootRaycast.transform.position, dir, out hitInfo, currentWeapon.range, layerMask))
         {
             if (hitInfo.collider.tag == "Player")
             {
                 CmdPlayerWasShot(hitInfo.collider.name, currentWeapon.damage);
             }
-            //Debug.Log("hit: " + hitInfo.point);
             SpawnWeaponImpact(hitInfo.point, hitInfo.normal);
         }
         //TODO: play a sound
@@ -80,7 +67,7 @@ public class PlayerShoot : NetworkBehaviour
     [Client]
     private void SpawnWeaponImpact(Vector3 point, Vector3 normal)
     {
-        Instantiate(weaponImpactEffect, point, Quaternion.Euler(normal));
+        Instantiate(weaponManager.GetImpactEffect(), point, Quaternion.Euler(normal));
     }
 
     [Command]

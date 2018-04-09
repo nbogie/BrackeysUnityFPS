@@ -214,6 +214,7 @@ GameObject:
   - component: {fileID: 114579655693717984}
   - component: {fileID: 114228106203456632}
   - component: {fileID: 114516505802853618}
+  - component: {fileID: 114754118354245884}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -717,15 +718,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ab8907dd6bf24e9394dfd4394e5c46d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentWeapon:
-    fireDelay: 0.2
-    accuracy: 0.01
-    range: 100
-    damage: 20
-    graphics: {fileID: 1314501180321840, guid: 82f7865bd89d3425f9a78d28147018c0, type: 2}
-  weaponImpactEffect: {fileID: 1478897593541752, guid: 651d9da62846f42f5b12c4ecf5c0c488,
-    type: 2}
-  weaponHolder: {fileID: 4810902528259826}
+  weaponManager: {fileID: 0}
   layerMask:
     serializedVersion: 2
     m_Bits: 513
@@ -829,6 +822,32 @@ MonoBehaviour:
   m_SnapThreshold: 5
   m_InterpolateRotation: 10
   m_InterpolateMovement: 1
+--- !u!114 &114754118354245884
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1929701701202232}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4f469a422248432391e153346e20281, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  primaryWeapon:
+    fireDelay: 0.1
+    accuracy: 0.01
+    range: 10
+    damage: 5
+    graphics: {fileID: 1314501180321840, guid: 82f7865bd89d3425f9a78d28147018c0, type: 2}
+  currentWeapon:
+    fireDelay: 0.5
+    accuracy: 0.01
+    range: 10
+    damage: 5
+    graphics: {fileID: 0}
+  impactEffect: {fileID: 1478897593541752, guid: 651d9da62846f42f5b12c4ecf5c0c488,
+    type: 2}
+  weaponHolder: {fileID: 4810902528259826}
 --- !u!114 &114964334907908156
 MonoBehaviour:
   m_ObjectHideFlags: 1
