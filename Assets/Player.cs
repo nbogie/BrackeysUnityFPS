@@ -100,7 +100,7 @@ public class Player : NetworkBehaviour
     {
         ResetVariablesForRespawn();
         ResetComponentStatesForRespawn();
-        Transform  spawnPoint = NetworkManager.singleton.GetStartPosition();
+        Transform spawnPoint = NetworkManager.singleton.GetStartPosition();
         transform.position = spawnPoint.position;
         transform.rotation = spawnPoint.rotation;
     }

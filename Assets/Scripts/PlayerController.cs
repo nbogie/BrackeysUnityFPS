@@ -4,12 +4,13 @@ using UnityEngine;
 
 //Handles the input and sends commands to the motor
 [RequireComponent(typeof(PlayerMotor))]
+[RequireComponent(typeof(Animator))]
 public class PlayerController : MonoBehaviour
 {
-
+    // Component caching
     private PlayerMotor motor;
     private ConfigurableJoint joint;
-
+    private Animator animator;
 
     [Header("Controls")]
     [SerializeField]
@@ -39,6 +40,7 @@ public class PlayerController : MonoBehaviour
     {
         joint = GetComponent<ConfigurableJoint>();
         motor = GetComponent<PlayerMotor>();
+        animator = GetComponent<Animator>();
         fuelRemaining = maxFuel;
 
     }
@@ -46,11 +48,14 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         //Movement of sphere
-        float xMove = Input.GetAxisRaw("Horizontal");
-        float zMove = Input.GetAxisRaw("Vertical");
+        float xMove = Input.GetAxis("Horizontal");
+        float zMove = Input.GetAxis("Vertical");
         Vector3 movHorizontal = transform.right * xMove;
         Vector3 movForward = transform.forward * zMove;
-        Vector3 vel = (movHorizontal + movForward).normalized * moveSpeed;
+        Vector3 vel = (movHorizontal + movForward) * moveSpeed;
+
+        animator.SetFloat("ForwardSpeed", zMove);
+
         motor.Move(vel);
 
         Vector3 thrusterVec = Vector3.zero;
