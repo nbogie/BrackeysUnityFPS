@@ -295,6 +295,7 @@ GameObject:
   - component: {fileID: 4695526594695058}
   - component: {fileID: 135532278315140908}
   - component: {fileID: 54460415945498686}
+  - component: {fileID: 95361790807904708}
   - component: {fileID: 114883119575981818}
   - component: {fileID: 114774721343145146}
   - component: {fileID: 114111125179328912}
@@ -304,7 +305,6 @@ GameObject:
   - component: {fileID: 114998910097396346}
   - component: {fileID: 114753222372647130}
   - component: {fileID: 114161741136749118}
-  - component: {fileID: 95361790807904708}
   - component: {fileID: 114952557460449856}
   m_Layer: 8
   m_Name: Player
@@ -1518,6 +1518,8 @@ MonoBehaviour:
   - {fileID: 114856327811063560}
   dontDrawLayerName: DontDraw
   playerGraphics: {fileID: 1516587106888848}
+  playerUIPrefab: {fileID: 1616156808996190, guid: ceb45955c47c54f7f93d37ac741c850f,
+    type: 2}
 --- !u!114 &114774721343145146
 MonoBehaviour:
   m_ObjectHideFlags: 1

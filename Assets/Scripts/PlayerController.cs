@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,6 +12,7 @@ public class PlayerController : MonoBehaviour
     private PlayerMotor motor;
     private ConfigurableJoint joint;
     private Animator animator;
+    #region gameplay variables
 
     [Header("Controls")]
     [SerializeField]
@@ -33,7 +35,7 @@ public class PlayerController : MonoBehaviour
     private const float maxFuel = 100f;
     [SerializeField]
     private float fuelRemaining = maxFuel;
-
+    #endregion
     #region Unity Callbacks
 
     void Start()
@@ -81,11 +83,23 @@ public class PlayerController : MonoBehaviour
         float xRotInc = Input.GetAxis("Mouse Y");
         motor.RotateCamera(-xRotInc * lookSensitivityVertical);
 
-        if (Input.GetKeyDown(KeyCode.K)){
+        if (Input.GetKeyDown(KeyCode.K))
+        {
             Debug.Log("Killing player by keypress " + transform.name);
             GetComponent<Player>().RpcTakeDamage(99999);
         }
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            ToggleCursorLock();
+        }
     }
+
+    private void ToggleCursorLock()
+    {
+        Cursor.lockState = (Cursor.lockState == CursorLockMode.None) ? CursorLockMode.Locked : CursorLockMode.None;
+        Debug.Log("Cursor lock state: " + Cursor.lockState);
+    }
+
 
     #endregion
 
@@ -98,6 +112,7 @@ public class PlayerController : MonoBehaviour
         joint.yDrive = yDriveSettings;
 
     }
+    #region fuel
     private void SpendFuel()
     {
         fuelRemaining -= fuelPerFrame;
@@ -107,7 +122,10 @@ public class PlayerController : MonoBehaviour
     {
         return fuelRemaining > 0f;
     }
-
+    public float GetFuelFraction()
+    {
+        return fuelRemaining / maxFuel;
+    }
     void RegenerateFuel()
     {
         fuelRemaining += fuelRegenPerFrame;
@@ -117,4 +135,6 @@ public class PlayerController : MonoBehaviour
         }
 
     }
+    #endregion
+
 }

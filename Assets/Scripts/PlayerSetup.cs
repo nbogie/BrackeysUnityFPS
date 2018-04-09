@@ -15,6 +15,10 @@ public class PlayerSetup : NetworkBehaviour
     [SerializeField]
     GameObject playerGraphics;
 
+    [SerializeField]
+    GameObject playerUIPrefab;
+    GameObject playerUIInstance; 
+
     #region Unity Callbacks
     void Start()
     {
@@ -33,14 +37,18 @@ public class PlayerSetup : NetworkBehaviour
             }
 
             //Disable obstructive player graphics for local player
+            //TODO: consider: how bullet impacts still hit this layer.
             int layer = LayerMask.NameToLayer(dontDrawLayerName);
             SetLayerRecursively(playerGraphics.transform, layer);
-            //TODO: consider: how bullet impacts still hit this layer.
+
+            playerUIInstance = Instantiate(playerUIPrefab);
+            playerUIInstance.name = playerUIPrefab.name;
         }
         GetComponent<Player>().Setup();
     }
     private void OnDisable()
     {
+        Destroy(playerUIInstance);
         if (sceneCamera)
         {
             Debug.Log("reactivate scene camera");
