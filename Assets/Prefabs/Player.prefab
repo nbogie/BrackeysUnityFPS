@@ -129,10 +129,10 @@ GameObject:
   - component: {fileID: 114387728270869306}
   - component: {fileID: 114285865432631128}
   - component: {fileID: 153314447111249470}
-  - component: {fileID: 114854156673494568}
   - component: {fileID: 114892003008891904}
   - component: {fileID: 114371695583080598}
   - component: {fileID: 114562767928672500}
+  - component: {fileID: 114854156673494568}
   - component: {fileID: 114605688316318518}
   m_Layer: 8
   m_Name: Player
@@ -1023,6 +1023,7 @@ MonoBehaviour:
   weaponFireDelay: 0.1
   accuracy: 0.01
   weaponRange: 100
+  weaponDamage: 40
   layerMask:
     serializedVersion: 2
     m_Bits: 513
@@ -1037,7 +1038,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6bb098c95885946ce83df550d164bd62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 100
+  componentsToDisableOnDeath:
+  - {fileID: 114562767928672500}
+  - {fileID: 114892003008891904}
+  maxHealth: 100
 --- !u!114 &114792578016622896
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1081,12 +1085,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 481d441635dd44680b4766c6e9df88ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  componentsToDisable:
-  - {fileID: 81849023983591012}
-  - {fileID: 20254047104390990}
-  - {fileID: 114371695583080598}
+  componentsToDisableForRemotes:
   - {fileID: 114892003008891904}
   - {fileID: 114562767928672500}
+  - {fileID: 20254047104390990}
+  - {fileID: 81849023983591012}
 --- !u!114 &114892003008891904
 MonoBehaviour:
   m_ObjectHideFlags: 1

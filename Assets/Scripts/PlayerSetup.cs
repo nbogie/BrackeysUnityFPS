@@ -9,14 +9,14 @@ public class PlayerSetup : NetworkBehaviour
     private Camera sceneCamera;
 
     [SerializeField]
-    Behaviour[] componentsToDisable;
+    Behaviour[] componentsToDisableForRemotes;
 
     #region Unity Callbacks
     void Start()
     {
         if (!isLocalPlayer)
         {
-            DisableComponents();
+            DisableComponentsForRemotePlayerObjects();
             AssignToRemoteLayer();
         }
         else
@@ -28,6 +28,7 @@ public class PlayerSetup : NetworkBehaviour
                 sceneCamera.gameObject.SetActive(false);
             }
         }
+        GetComponent<Player>().Setup();
     }
     private void OnDisable()
     {
@@ -60,11 +61,11 @@ public class PlayerSetup : NetworkBehaviour
 
     }
 
-    private void DisableComponents()
+    private void DisableComponentsForRemotePlayerObjects()
     {
-        foreach (Behaviour b in componentsToDisable)
+        foreach (Behaviour b in componentsToDisableForRemotes)
         {
-            Debug.Log("Intentionally disabling: " + b.name);
+            Debug.Log("Intentionally disabling: " + b.name + " on remote's player obj");
             b.enabled = false;
         }
     }

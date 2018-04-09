@@ -76,7 +76,10 @@ public class PlayerController : MonoBehaviour
         float xRotInc = Input.GetAxis("Mouse Y");
         motor.RotateCamera(-xRotInc * lookSensitivityVertical);
 
-
+        if (Input.GetKeyDown(KeyCode.K)){
+            Debug.Log("Killing player by keypress " + transform.name);
+            GetComponent<Player>().RpcTakeDamage(99999);
+        }
     }
 
     #endregion
