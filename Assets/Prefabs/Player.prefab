@@ -39,8 +39,6 @@ GameObject:
   - component: {fileID: 4323045128504130}
   - component: {fileID: 199073924515142472}
   - component: {fileID: 198994269199913918}
-  - component: {fileID: 135583215309599606}
-  - component: {fileID: 114238801676923686}
   m_Layer: 0
   m_Name: AfterburnerLeft
   m_TagString: Untagged
@@ -273,8 +271,6 @@ GameObject:
   - component: {fileID: 4045683075049258}
   - component: {fileID: 199465030764434374}
   - component: {fileID: 198136078602109516}
-  - component: {fileID: 135703124628798350}
-  - component: {fileID: 114014921368071898}
   m_Layer: 0
   m_Name: AfterburnerRight
   m_TagString: Untagged
@@ -484,7 +480,7 @@ Transform:
   m_GameObject: {fileID: 1365981287330064}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0, y: 0, z: 0}
-  m_LocalScale: {x: 0.01, y: 0.01, z: 0.01}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4045683075049258}
   m_RootOrder: 0
@@ -568,7 +564,7 @@ Transform:
   m_GameObject: {fileID: 1659964801475398}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0, y: 0, z: 0}
-  m_LocalScale: {x: 0.01, y: 0.01, z: 0.01}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4323045128504130}
   m_RootOrder: 0
@@ -1419,36 +1415,6 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &114014921368071898
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1571902913132086}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5d44a238286f6904198ab78e914c229d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  effectAngle: 20
-  effectWidth: 2
-  effectDistance: 10
-  force: 140
---- !u!114 &114238801676923686
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1070974406846276}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5d44a238286f6904198ab78e914c229d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  effectAngle: 20
-  effectWidth: 2
-  effectDistance: 10
-  force: 140
 --- !u!114 &114285865432631128
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1644,30 +1610,6 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!135 &135583215309599606
-SphereCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1070974406846276}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 5
-  m_Center: {x: 0, y: 0, z: 5}
---- !u!135 &135703124628798350
-SphereCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1571902913132086}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 5
-  m_Center: {x: 0, y: 0, z: 5}
 --- !u!136 &136385840907323778
 CapsuleCollider:
   m_ObjectHideFlags: 1
@@ -1848,7 +1790,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 2
-  randomSeed: 1386568075
+  randomSeed: -803397200
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -5167,7 +5109,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 2
-  randomSeed: 1952725278
+  randomSeed: 1586522360
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -8468,7 +8410,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 2
-  randomSeed: 1025597848
+  randomSeed: 33371070
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -11769,7 +11711,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 2
-  randomSeed: -109869982
+  randomSeed: -1295149834
   InitialModule:
     serializedVersion: 3
     enabled: 1
