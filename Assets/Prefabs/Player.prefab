@@ -844,7 +844,7 @@ MonoBehaviour:
     accuracy: 0.02
     range: 10
     damage: 5
-    graphics: {fileID: 1735090578919102, guid: e0229009fc7f84c279bd7f334f68df1a, type: 2}
+    graphics: {fileID: 1195932626574278, guid: e0229009fc7f84c279bd7f334f68df1a, type: 2}
   impactEffect: {fileID: 1478897593541752, guid: 651d9da62846f42f5b12c4ecf5c0c488,
     type: 2}
   weaponHolder: {fileID: 4810902528259826}
