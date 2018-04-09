@@ -5,17 +5,12 @@ using UnityEngine.Networking;
 
 public class PlayerShoot : NetworkBehaviour
 {
+    [SerializeField]
+    public PlayerWeapon currentWeapon;
+
     [Header("Weapon settings")]
     [SerializeField]
     private GameObject weaponImpactEffect;
-    [SerializeField]
-    private float weaponFireDelay = 0.5f;
-    [SerializeField]
-    private float accuracy = 0.01f;
-    [SerializeField]
-    private float weaponRange = 10f;
-    [SerializeField]
-    private int weaponDamage = 5;
     [SerializeField]
     private LayerMask layerMask;
 
@@ -31,12 +26,22 @@ public class PlayerShoot : NetworkBehaviour
 
     void Update()
     {
-        if (Input.GetButton("Fire1"))
+        if (currentWeapon.CanAutoFire())
         {
-            if (timeForNextFiring <= Time.time)
+            if (Input.GetButtonDown("Fire1"))
+            {
+                InvokeRepeating("FireWeapon", 0.000001f, currentWeapon.fireDelay);
+            }
+            if (Input.GetButtonUp("Fire1"))
+            {
+                CancelInvoke();
+            }
+        }
+        else
+        {
+            if (Input.GetButton("Fire1"))
             {
                 FireWeapon();
-                timeForNextFiring = Time.time + weaponFireDelay;
             }
         }
     }
@@ -46,12 +51,12 @@ public class PlayerShoot : NetworkBehaviour
     private void FireWeapon()
     {
         RaycastHit hitInfo;
-        Vector3 dir = myCam.transform.forward + Random.insideUnitSphere * accuracy;
-        if (Physics.Raycast(myCam.transform.position, dir, out hitInfo, weaponRange, layerMask))
+        Vector3 dir = myCam.transform.forward + Random.insideUnitSphere * currentWeapon.accuracy;
+        if (Physics.Raycast(myCam.transform.position, dir, out hitInfo, currentWeapon.range, layerMask))
         {
             if (hitInfo.collider.tag == "Player")
             {
-                CmdPlayerWasShot(hitInfo.collider.name, weaponDamage);
+                CmdPlayerWasShot(hitInfo.collider.name, currentWeapon.damage);
             }
             //Debug.Log("hit: " + hitInfo.point);
             SpawnWeaponImpact(hitInfo.point, hitInfo.normal);

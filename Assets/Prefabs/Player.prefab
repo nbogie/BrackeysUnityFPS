@@ -1615,12 +1615,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ab8907dd6bf24e9394dfd4394e5c46d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentWeapon:
+    fireDelay: 0.2
+    accuracy: 0.01
+    range: 100
+    damage: 20
   weaponImpactEffect: {fileID: 1478897593541752, guid: 651d9da62846f42f5b12c4ecf5c0c488,
     type: 2}
-  weaponFireDelay: 0.1
-  accuracy: 0.01
-  weaponRange: 100
-  weaponDamage: 40
   layerMask:
     serializedVersion: 2
     m_Bits: 513
