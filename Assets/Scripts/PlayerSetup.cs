@@ -39,7 +39,7 @@ public class PlayerSetup : NetworkBehaviour
             //Disable obstructive player graphics for local player
             //TODO: consider: how bullet impacts still hit this layer.
             int layer = LayerMask.NameToLayer(dontDrawLayerName);
-            SetLayerRecursively(playerGraphics.transform, layer);
+            Utils.SetLayerRecursively(playerGraphics.transform, layer);
 
             playerUIInstance = Instantiate(playerUIPrefab);
             playerUIInstance.name = playerUIPrefab.name;
@@ -68,16 +68,6 @@ public class PlayerSetup : NetworkBehaviour
     }
     #endregion
 
-    void SetLayerRecursively(Transform t, int layer)
-    {
-        Debug.Log("setting layer for " + t.gameObject.name + " to " + layer);
-        t.gameObject.layer = layer;
-        foreach (Transform otherT in t.transform)
-        {
-            SetLayerRecursively(otherT, layer);
-        }
-
-    }
 
     private void AssignToRemoteLayer()
     {
