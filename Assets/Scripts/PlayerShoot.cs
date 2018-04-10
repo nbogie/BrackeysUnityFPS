@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 [RequireComponent(typeof(WeaponManager))]
+[RequireComponent(typeof(AudioSource))]
 public class PlayerShoot : NetworkBehaviour
 {
 
@@ -13,6 +14,7 @@ public class PlayerShoot : NetworkBehaviour
     private PlayerWeapon currentWeapon;
 
     private Camera camForShootRaycast;
+    private AudioSource audioSource;
 
     #region Unity Callbacks
     void Start()
@@ -20,6 +22,7 @@ public class PlayerShoot : NetworkBehaviour
         layerMask = LayerMask.GetMask("Default", "RemotePlayers");
         weaponManager = GetComponent<WeaponManager>();
         camForShootRaycast = GetComponentInChildren<Camera>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -56,6 +59,7 @@ public class PlayerShoot : NetworkBehaviour
     [Client]
     private void FireWeapon()
     {
+        
         RaycastHit hitInfo;
         Vector3 dir = camForShootRaycast.transform.forward + Random.insideUnitSphere * currentWeapon.accuracy;
         if (Physics.Raycast(camForShootRaycast.transform.position, dir, out hitInfo, currentWeapon.range, layerMask))
@@ -66,9 +70,19 @@ public class PlayerShoot : NetworkBehaviour
             }
             SpawnWeaponImpact(hitInfo.point, hitInfo.normal);
         }
-        //TODO: play a sound
-        //TODO: show muzzle flash
+        AudioClip clip = currentWeapon.singleShotSound;
+        if (clip)
+        {
+            audioSource.clip = clip;
+            audioSource.pitch = Random.Range(0.9f, 1.2f);
+            audioSource.Play();
+        }
+
+        WeaponGraphics gfx = weaponManager.GetCurrentGraphics();
+        gfx.TriggerVisualFireEffect();
+
         //TODO: apply a recoil
+
     }
 
     [Client]

@@ -14,7 +14,7 @@ public class WeaponManager : MonoBehaviour
     [SerializeField]
     private Transform weaponHolder;
 
-    private GameObject currentWeaponGfxInstance;
+    private WeaponGraphics currentGraphics;
 
     [SerializeField]
     public PlayerWeapon currentWeapon;
@@ -44,8 +44,14 @@ public class WeaponManager : MonoBehaviour
         }
 
         currentWeapon = weapon;
-        currentWeaponGfxInstance = Instantiate(weapon.graphics, weaponHolder.position, weaponHolder.rotation);
-        currentWeaponGfxInstance.transform.SetParent(weaponHolder);
+        GameObject o = Instantiate(weapon.graphics, weaponHolder.position, weaponHolder.rotation);
+        o.transform.SetParent(weaponHolder);
+
+        currentGraphics = o.GetComponent<WeaponGraphics>();
+        if (!currentGraphics)
+        {
+            Debug.LogError("No WeaponGraphics script on the current weapon " + o.name);
+        }
     }
 
     public GameObject GetImpactEffect()
@@ -56,6 +62,10 @@ public class WeaponManager : MonoBehaviour
     public PlayerWeapon GetCurrentWeapon()
     {
         return currentWeapon;
+    }
+    public WeaponGraphics GetCurrentGraphics()
+    {
+        return currentGraphics;
     }
 
 }

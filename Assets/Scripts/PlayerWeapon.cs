@@ -10,6 +10,8 @@ public class PlayerWeapon
 
     public GameObject graphics;
 
+    public AudioClip singleShotSound;
+
     public bool CanAutoFire()
     {
         return fireDelay > 0;
